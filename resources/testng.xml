@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="NopCommerce Automation Testing">
+
+    <parameter name="userUrl" value="http://localhost:5000/"/>
+    <parameter name="adminUrl" value="http://localhost:5000/Admin"/>
+
+    <test verbose="1" preserve-order="true" name="Run on Firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+<!--            <class name="com.orangeHRM.Level_10_Dynamic_Locator" />-->
+        </classes>
+    </test>
+
+<!--    <test verbose="2" preserve-order="true" name="Run on Chrome">-->
+<!--        <parameter name="browser" value="Chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="com.nopcommerce.account.Level_07_Switch_Page_Object" />-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test verbose="3" preserve-order="true" name="Run on Edge">-->
+<!--        <parameter name="browser" value="Edge"/>-->
+<!--        <classes>-->
+<!--            <class name="com.nopcommerce.account.Level_07_Switch_Page_Object" />-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test verbose="4" preserve-order="true" name="Run on Safari">-->
+<!--        <parameter name="browser" value="Safari"/>-->
+<!--        <classes>-->
+<!--            <class name="com.nopcommerce.account.Level_07_Switch_Page_Object" />-->
+<!--        </classes>-->
+<!--    </test>-->
+</suite>
