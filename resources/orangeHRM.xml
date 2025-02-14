@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="NopCommerce Automation Testing">
+<suite name="OrangeHRM Automation Testing">
 
-    <parameter name="userUrl" value="http://localhost:5000/"/>
-    <parameter name="adminUrl" value="http://localhost:5000/Admin"/>
+    <parameter name="url" value="http://localhost/orangehrm5/web/"/>
 
     <test verbose="1" preserve-order="true" name="Run on Firefox">
         <parameter name="browser" value="firefox"/>
         <classes>
-<!--            <class name="com.orangeHRM.Level_10_Dynamic_Locator" />-->
+            <class name="com.orangeHRM.pim.PIM_01_Employee" />
         </classes>
     </test>
 

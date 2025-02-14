@@ -1,4 +1,4 @@
-package pageUIs.users;
+package pageUIs.orangeHRM;
 
 public class PageBaseUI {
 }
