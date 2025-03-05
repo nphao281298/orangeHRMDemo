@@ -5,12 +5,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.testng.annotations.BeforeSuite;
 
+import java.io.File;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     String projecPath = System.getProperty("user.dir");
+    public WebDriver getDriver() {
+        return driver;
+    }
     private WebDriver driver;
     protected WebDriver getBrowserDriver(String browserName){
         BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
@@ -31,7 +36,6 @@ public class BaseTest {
         driver.manage().window().maximize();
         return driver;
     }
-
 
     protected WebDriver getBrowserDriver(String browserName, String url){
         BrowserList browser = BrowserList.valueOf(browserName.toUpperCase());
@@ -72,6 +76,29 @@ public class BaseTest {
             Thread.sleep(timeInSecond*1000);
         }catch (InterruptedException e){
             e.printStackTrace();
+        }
+    }
+
+    @BeforeSuite
+    public void deleteReportFolder(){
+        deleteAllFileInFolder("htmlReportNG");
+        deleteAllFileInFolder("allure-results");
+    }
+
+    private void deleteAllFileInFolder(String folderName) {
+        try {
+            String pathFolderDownload = GlobalConstants.PROJECT_PATH + File.separator + folderName;
+            File file = new File(pathFolderDownload);
+            File[] listOfFiles = file.listFiles();
+            if (listOfFiles.length != 0) {
+                for (int i = 0; i < listOfFiles.length; i++) {
+                    if (listOfFiles[i].isFile() && !listOfFiles[i].getName().equals("environment.properties")) {
+                        new File(listOfFiles[i].toString()).delete();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.print(e.getMessage());
         }
     }
 }

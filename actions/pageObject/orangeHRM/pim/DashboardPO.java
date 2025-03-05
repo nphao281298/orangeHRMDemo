@@ -1,8 +1,10 @@
 package pageObject.orangeHRM.pim;
 
 import commons.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import pageObject.orangeHRM.pim.employee.EmployeeListPO;
+import pageUIs.orangeHRM.DashboardPUI;
 
 public class DashboardPO extends BasePage {
     public DashboardPO(WebDriver driver) {
@@ -11,7 +13,11 @@ public class DashboardPO extends BasePage {
 
     private WebDriver driver;
 
+    @Step("Click to PIM page")
     public EmployeeListPO clickToPIMPage() {
+        waitForElementClickable(driver, DashboardPUI.PIM_LINK);
+        clickToElement(driver, DashboardPUI.PIM_LINK);
+        waitAllLoadingIconInvisible(driver);
         return PageGenerator.getEmployeeListPage(driver);
     }
 }

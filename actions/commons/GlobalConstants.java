@@ -1,9 +1,12 @@
 package commons;
 
+import java.nio.file.FileSystems;
+
 public class GlobalConstants {
     // System Information
     public static final String PROJECT_PATH = System.getProperty("user.dir");
     public static final String OS_NAME = System.getProperty("os.name");
+    public static final String SEPARATOR = FileSystems.getDefault().getSeparator();
 
     // App Information for User
     public static final String DEV_USER_URL = "http://dev.techpanda.org/";
@@ -23,8 +26,8 @@ public class GlobalConstants {
     public static final long LONG_TIMEOUT = 30;
 
     // Download/Upload File Paths
-    public static final String UPLOAD_PATH = PROJECT_PATH + "/uploadFiles/";
-    public static final String DOWNLOAD_PATH = PROJECT_PATH + "/downloadFiles/";
+    public static final String UPLOAD_PATH = PROJECT_PATH + SEPARATOR + "uploadFiles"+ SEPARATOR;
+    public static final String DOWNLOAD_PATH = PROJECT_PATH + SEPARATOR + "downloadFiles"+ SEPARATOR;
 
     // Retry Case Failed
     public static final int RETRY_NUMBER = 3;

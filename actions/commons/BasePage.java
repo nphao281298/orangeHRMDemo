@@ -6,6 +6,7 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageUIs.orangeHRM.BasePageUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -179,6 +180,10 @@ public class BasePage {
 
     public String getElementText(WebDriver webDriver, String locator){
         return getWebElement(webDriver, locator).getText();
+    }
+
+    public Dimension getElementSize(WebDriver webDriver, String locator){
+        return getWebElement(webDriver, locator).getSize();
     }
 
     public void selecteItemInDefaultDropdown(WebDriver webDriver, String locator, String itemValue){
@@ -380,4 +385,22 @@ public class BasePage {
         new WebDriverWait(webDriver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(getWebElement(webDriver,castParameter(locator,restParameter))));
     }
 
+    public boolean waitForListElementInvisible(WebDriver driver, String locator){
+        return new WebDriverWait(driver, Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT))
+                .until(ExpectedConditions.invisibilityOfAllElements(getListWebElement(driver, locator)));
+
+    }
+    public boolean waitAllLoadingIconInvisible(WebDriver driver) {
+        return waitForListElementInvisible(driver, BasePageUI.LOADING_ICON);
+    }
+
+    public void uploadMultipleFiles(WebDriver driver, String... fileNames) {
+        String filePath = GlobalConstants.UPLOAD_PATH;
+        String fullFileName = "";
+        for (String file : fileNames) {
+            fullFileName += filePath + file + "\n";
+        }
+        String finalFileName = fullFileName.trim();
+        getWebElement(driver, BasePageUI.UPLOAD_FILE_TYPE).sendKeys(finalFileName);
+    }
 }
