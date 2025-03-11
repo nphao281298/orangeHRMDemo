@@ -7,11 +7,12 @@ import pageObject.orangeHRM.pim.employee.EmployeeListPO;
 import pageUIs.orangeHRM.DashboardPUI;
 
 public class DashboardPO extends BasePage {
+    private WebDriver driver;
     public DashboardPO(WebDriver driver) {
         this.driver = driver;
     }
 
-    private WebDriver driver;
+
 
     @Step("Click to PIM page")
     public EmployeeListPO clickToPIMPage() {

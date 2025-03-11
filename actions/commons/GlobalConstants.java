@@ -1,5 +1,6 @@
 package commons;
 
+import java.io.File;
 import java.nio.file.FileSystems;
 
 public class GlobalConstants {
@@ -18,8 +19,8 @@ public class GlobalConstants {
     public static final String STAGING_ADMIN_URL = "http://staging.techpanda.org/index.php/backendlogin";
     public static final String LIVE_ADMIN_URL = "http://live.techpanda.org/index.php/backendlogin";
 
-    public static final String ADMIN_USERNAME = "user01";
-    public static final String ADMIN_PASSWORD = "guru99com";
+    public static final String USERNAME = "automationfc";
+    public static final String PASSWORD = "G7m!k#Pq2$X8zT@3";
 
     // Wait Information
     public static final long SHORT_TIMEOUT = 10;
@@ -42,7 +43,9 @@ public class GlobalConstants {
     public static final String ALLURE_PATH = PROJECT_PATH + "/htmlAllure/";
 
     // Data Test/Environment Paths
-    public static final String DATA_TEST_PATH = PROJECT_PATH + "/dataTest/";
+    public static final String DATA_TEST_PATH = PROJECT_PATH + SEPARATOR + "dataTest" + SEPARATOR;
     public static final String ENVIRONMENT_CONFIG_PATH = PROJECT_PATH + "/environmentConfig/";
+
+    public static final String RESOURCE_PATH = PROJECT_PATH + File.separator + "dataTest" + File.separator;
 
 }

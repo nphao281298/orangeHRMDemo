@@ -24,11 +24,25 @@ public class LoginPO extends BasePage {
         sendKeysToElement(driver, LoginPUI.PASSWORD_TEXTBOX, password);
     }
 
+    @Step("Click to Login button")
+    public void clickToLoginBTN(){
+        waitForElementClickable(driver, LoginPUI.LOGIN_BUTTON);
+        clickToElement(driver, LoginPUI.LOGIN_BUTTON);
+    }
+
     @Step("Click Login button")
     public DashboardPO clickToLoginButton() {
         waitForElementClickable(driver, LoginPUI.LOGIN_BUTTON);
         clickToElement(driver, LoginPUI.LOGIN_BUTTON);
         waitAllLoadingIconInvisible(driver);
+        return PageGenerator.getDashboardPage(driver);
+    }
+
+    @Step("Login System: {0}, {1}")
+    public DashboardPO loginSystem(String userName, String password){
+        enterToUsernameTextBox(userName);
+        enterToPasswordTextBox(password);
+        clickToLoginBTN();
         return PageGenerator.getDashboardPage(driver);
     }
 }

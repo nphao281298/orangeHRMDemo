@@ -7,10 +7,14 @@
       <sourceFolder url="file://$MODULE_DIR$/interfaces" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/testcases" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/testData" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="testng-7.10.2" level="project" />
-    <orderEntry type="library" name="allure" level="project" />
+    <orderEntry type="library" name="selenium-server-4.27.0" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.15.2" level="project" />
+    <orderEntry type="library" name="allure-java-commons-2.28.0" level="project" />
+    <orderEntry type="library" name="commons-lang3-3.5" level="project" />
+    <orderEntry type="library" name="libPOI" level="project" />
   </component>
 </module>

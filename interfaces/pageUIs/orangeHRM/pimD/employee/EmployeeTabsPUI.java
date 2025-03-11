@@ -1,4 +1,4 @@
-package pageUIs.orangeHRM.pim.employee;
+package pageUIs.orangeHRM.pimD.employee;
 
 public class EmployeeTabsPUI {
     public static final String PERSONAL_DETAL_LINK = "Xpath=";

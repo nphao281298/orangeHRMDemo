@@ -3,7 +3,10 @@ package pageObject.orangeHRM.pim.employee;
 import io.qameta.allure.Step;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import pageUIs.orangeHRM.pim.employee.PersonalDetailsPUI;
+import pageObject.orangeHRM.pim.PageGenerator;
+import pageUIs.orangeHRM.DashboardPUI;
+import pageUIs.orangeHRM.pimD.employee.EmployeeListPUI;
+import pageUIs.orangeHRM.pimD.employee.PersonalDetailsPUI;
 
 public class PersonalDetailsPO extends EmployeeTabs {
     public PersonalDetailsPO(WebDriver driver) {
@@ -47,5 +50,12 @@ public class PersonalDetailsPO extends EmployeeTabs {
         waitAllLoadingIconInvisible(driver);
         waitForElementVisible(driver, PersonalDetailsPUI.EMPLOYEE_ID_TEXTBOX_PD);
         return getElementAttribute(driver, PersonalDetailsPUI.EMPLOYEE_ID_TEXTBOX_PD, "value");
+    }
+
+    public AddNewEmployeePO clickToaddEmployeeButton() {
+        waitForElementClickable(driver, PersonalDetailsPUI.ADD_EMPLOYEE_PD_BUTTON);
+        clickToElement(driver, PersonalDetailsPUI.ADD_EMPLOYEE_PD_BUTTON);
+        waitAllLoadingIconInvisible(driver);
+        return PageGenerator.getAddNewEmployeePage(driver);
     }
 }
