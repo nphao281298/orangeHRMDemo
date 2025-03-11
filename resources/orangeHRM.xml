@@ -17,21 +17,21 @@
 <!--    <test verbose="2" preserve-order="true" name="Run on Chrome">-->
 <!--        <parameter name="browser" value="Chrome"/>-->
 <!--        <classes>-->
-<!--            <class name="com.orangeHRM.pim.PIM_01_Employee" />-->
+<!--            <class name="com.orangeHRM.pim.PIM_00_Demo" />-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test verbose="3" preserve-order="true" name="Run on Edge">-->
 <!--        <parameter name="browser" value="Edge"/>-->
 <!--        <classes>-->
-<!--            <class name="com.orangeHRM.pim.PIM_01_Employee" />-->
+<!--            <class name="com.orangeHRM.pim.PIM_00_Demo" />-->
 <!--        </classes>-->
 <!--    </test>-->
 
 <!--    <test verbose="4" preserve-order="true" name="Run on Safari">-->
 <!--        <parameter name="browser" value="Safari"/>-->
 <!--        <classes>-->
-<!--            <class name="com.orangeHRM.pim.PIM_01_Employee" />-->
+<!--            <class name="com.orangeHRM.pim.PIM_00_Demo" />-->
 <!--        </classes>-->
 <!--    </test>-->
 </suite>

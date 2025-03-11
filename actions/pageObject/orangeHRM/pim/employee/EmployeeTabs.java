@@ -3,7 +3,7 @@ package pageObject.orangeHRM.pim.employee;
 import commons.BasePage;
 import org.openqa.selenium.WebDriver;
 import pageObject.orangeHRM.pim.PageGenerator;
-import pageUIs.orangeHRM.pim.employee.EmployeeTabsPUI;
+import pageUIs.orangeHRM.pimD.employee.EmployeeTabsPUI;
 
 public class EmployeeTabs extends BasePage {
     WebDriver driver;

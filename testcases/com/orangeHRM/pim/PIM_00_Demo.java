@@ -1,0 +1,119 @@
+package com.orangeHRM.pim;
+
+import commons.BaseTest;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import pageObject.orangeHRM.pim.DashboardPO;
+import pageObject.orangeHRM.pim.LoginPO;
+import pageObject.orangeHRM.pim.PageGenerator;
+import pageObject.orangeHRM.pim.employee.AddNewEmployeePO;
+import pageObject.orangeHRM.pim.employee.EmployeeListPO;
+import pageObject.orangeHRM.pim.employee.PersonalDetailsPO;
+
+public class PIM_00_Demo extends BaseTest {
+    WebDriver driver;
+    private LoginPO loginPage;
+    private DashboardPO dashboardPage;
+    private EmployeeListPO employeeListPage;
+    private PersonalDetailsPO personalDetailsPage;
+    private AddNewEmployeePO addNewEmployeePage;
+    private String employeeID, firstName, lastName, empployeeIdPD;
+    private String avatarImageName = "avatar.png";
+
+    @Parameters({"browser", "url"})
+    @BeforeClass
+    public void beforeClass(String browserName, String url){
+        driver = getBrowserDriver(browserName, url);
+        loginPage = PageGenerator.getLoginPage(driver);
+        firstName = "John";
+        lastName = "Wick";
+        loginPage.enterToUsernameTextBox("automationfc");
+        loginPage.enterToPasswordTextBox("G7m!k#Pq2$X8zT@3");
+        dashboardPage = loginPage.clickToLoginButton();
+    }
+
+    @Test
+    public void Employee_01_Add_New_Employee(){
+        employeeListPage = dashboardPage.clickToPIMPage();
+        addNewEmployeePage = employeeListPage.clickToaddEmployeeButton();
+        addNewEmployeePage.enterToFirstNameTextBox(firstName);
+        addNewEmployeePage.enterTolastNameTextBox(lastName);
+        employeeID = addNewEmployeePage.getEmployeeId();
+        personalDetailsPage = addNewEmployeePage.clicktoSaveButtonAtEmployeeContainer();
+        empployeeIdPD = personalDetailsPage.getEmployeeIdPD();
+        Assert.assertEquals(employeeID, empployeeIdPD);
+    }
+
+    @Test
+    public void Employee_02_Upload_Avatar(){
+        personalDetailsPage.clickToEmployeeAvatarImage();
+        Dimension beforeUpload = personalDetailsPage.getAvatarSize();
+        personalDetailsPage.uploadMultipleFiles(driver, avatarImageName);
+        personalDetailsPage.clickToSaveButtonAtProfileContainer();
+        personalDetailsPage.isSuccessMessageIsDisplayed();
+        personalDetailsPage.waitAllLoadingIconInvisible(driver);
+        Assert.assertTrue(personalDetailsPage.isProfileAvatarUpdateSuccess(beforeUpload));
+
+    }
+
+    @Test
+    public void Employee_03_Personal_Details(){
+
+    }
+
+
+//    @Test
+    public void Employee_04_Contact_Details(){
+
+    }
+
+//    @Test
+    public void Employee_05_Emergency_Details(){
+
+    }
+
+//    @Test
+    public void Employee_06_Dependents(){
+
+    }
+
+//    @Test
+    public void Employee_07_Immigration(){
+
+    }
+
+//    @Test
+    public void Employee_08_Jobs(){
+
+    }
+
+//    @Test
+    public void Employee_09_Salary(){
+
+    }
+
+//    @Test
+    public void Employee_10_ReportTo(){
+
+    }
+
+//    @Test
+    public void Employee_11_Qualifications(){
+
+    }
+
+//    @Test
+    public void Employee_12_(){
+
+    }
+
+    @AfterClass
+    public void afterClass() {
+        closeBrowser();
+    }
+}

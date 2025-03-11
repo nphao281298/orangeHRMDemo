@@ -1,6 +1,11 @@
 package com.orangeHRM.pim;
 
 import commons.BaseTest;
+import commons.GlobalConstants;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import jsonData.EmployeeInforJson;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -14,39 +19,58 @@ import pageObject.orangeHRM.pim.PageGenerator;
 import pageObject.orangeHRM.pim.employee.AddNewEmployeePO;
 import pageObject.orangeHRM.pim.employee.EmployeeListPO;
 import pageObject.orangeHRM.pim.employee.PersonalDetailsPO;
+import pojoData.EmployeeInfor;
+import utilities.ExcelConfig;
 
 public class PIM_01_Employee extends BaseTest {
-    WebDriver driver;
-    private LoginPO loginPage;
-    private DashboardPO dashboardPage;
-    private EmployeeListPO employeeListPage;
-    private PersonalDetailsPO personalDetailsPage;
-    private AddNewEmployeePO addNewEmployeePage;
-    private String employeeID, firstName, lastName, empployeeIdPD;
-    private String avatarImageName = "avatar.png";
-
     @Parameters({"browser", "url"})
     @BeforeClass
     public void beforeClass(String browserName, String url){
         driver = getBrowserDriver(browserName, url);
         loginPage = PageGenerator.getLoginPage(driver);
-        firstName = "John";
-        lastName = "Wick";
-        loginPage.enterToUsernameTextBox("automationfc");
-        loginPage.enterToPasswordTextBox("G7m!k#Pq2$X8zT@3");
-        dashboardPage = loginPage.clickToLoginButton();
+        dashboardPage = loginPage.loginSystem(GlobalConstants.USERNAME, GlobalConstants.PASSWORD);
+        employeeInfor = EmployeeInfor.getInstance();
+        employeeInfor.setFirstName("John");
+        employeeInfor.setLastName("Wick");
+        /*------------------*/
+        employeeInforJson = EmployeeInforJson.getInstance();
+        /*-----------------*/
+        excelConfig = ExcelConfig.getExcelData();
+        excelConfig.switchToSheet("employeeDataExcel");
+        firstName = excelConfig.getCellData("FirstName", 1);
+        lastName = excelConfig.getCellData("LastName", 1);
     }
-
+    @Description("Add new employee")
+    @Severity(SeverityLevel.NORMAL)
     @Test
-    public void Employee_01_Add_New_Employee(){
+    public void Employee_01_Add_New_Employee_By_Object(){
         employeeListPage = dashboardPage.clickToPIMPage();
         addNewEmployeePage = employeeListPage.clickToaddEmployeeButton();
-        addNewEmployeePage.enterToFirstNameTextBox(firstName);
-        addNewEmployeePage.enterTolastNameTextBox(lastName);
         employeeID = addNewEmployeePage.getEmployeeId();
-        personalDetailsPage = addNewEmployeePage.clicktoSaveButtonAtEmployeeContainer();
+        personalDetailsPage = addNewEmployeePage.createNewEmployee(employeeInforJson);
         empployeeIdPD = personalDetailsPage.getEmployeeIdPD();
         Assert.assertEquals(employeeID, empployeeIdPD);
+    }
+
+    @Description("Add new employee")
+    @Severity(SeverityLevel.NORMAL)
+    @Test
+    public void Employee_02_Add_New_Employee_By_JSON(){
+        addNewEmployeePage = personalDetailsPage.clickToaddEmployeeButton();
+        employeeID = addNewEmployeePage.getEmployeeId();
+        personalDetailsPage = addNewEmployeePage.createNewEmployee(employeeInfor);
+        empployeeIdPD = personalDetailsPage.getEmployeeIdPD();
+    }
+
+    @Description("Add new employee")
+    @Severity(SeverityLevel.NORMAL)
+    @Test
+    public void Employee_03_Add_New_Employee_By_Excel(){
+        addNewEmployeePage = personalDetailsPage.clickToaddEmployeeButton();
+        employeeID = addNewEmployeePage.getEmployeeId();
+        personalDetailsPage = addNewEmployeePage.createNewEmployee(firstName, lastName);
+        System.out.println(firstName + lastName);
+        empployeeIdPD = personalDetailsPage.getEmployeeIdPD();
     }
 
     @Test
@@ -58,7 +82,6 @@ public class PIM_01_Employee extends BaseTest {
         personalDetailsPage.isSuccessMessageIsDisplayed();
         personalDetailsPage.waitAllLoadingIconInvisible(driver);
         Assert.assertTrue(personalDetailsPage.isProfileAvatarUpdateSuccess(beforeUpload));
-
     }
 
     @Test
@@ -67,53 +90,64 @@ public class PIM_01_Employee extends BaseTest {
     }
 
 
-//    @Test
+    //    @Test
     public void Employee_04_Contact_Details(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_05_Emergency_Details(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_06_Dependents(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_07_Immigration(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_08_Jobs(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_09_Salary(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_10_ReportTo(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_11_Qualifications(){
 
     }
 
-//    @Test
+    //    @Test
     public void Employee_12_(){
 
     }
-
     @AfterClass
     public void afterClass() {
         closeBrowser();
     }
+
+    WebDriver driver;
+    private LoginPO loginPage;
+    private DashboardPO dashboardPage;
+    private EmployeeListPO employeeListPage;
+    private AddNewEmployeePO addNewEmployeePage;
+    private PersonalDetailsPO personalDetailsPage;
+    private String employeeID, firstName, lastName, empployeeIdPD;
+    private EmployeeInfor employeeInfor;
+    private EmployeeInforJson employeeInforJson;
+    private ExcelConfig excelConfig;
+    private String avatarImageName = "avatar.png";
 }

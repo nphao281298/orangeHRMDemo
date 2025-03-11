@@ -1,4 +1,4 @@
-package pageUIs.orangeHRM.pim.employee;
+package pageUIs.orangeHRM.pimD.employee;
 
 public class AddNewPUI {
     public static final String FIRSTNAME_TEXTBOX = "name=firstName";

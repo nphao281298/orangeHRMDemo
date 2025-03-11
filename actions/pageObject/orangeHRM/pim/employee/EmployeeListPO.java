@@ -3,10 +3,8 @@ package pageObject.orangeHRM.pim.employee;
 import commons.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.devtools.v85.page.Page;
 import pageObject.orangeHRM.pim.PageGenerator;
-import pageUIs.orangeHRM.DashboardPUI;
-import pageUIs.orangeHRM.pim.employee.EmployeeListPUI;
+import pageUIs.orangeHRM.pimD.employee.EmployeeListPUI;
 
 public class EmployeeListPO extends BasePage {
     public EmployeeListPO(WebDriver driver) {
